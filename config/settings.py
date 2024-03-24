@@ -121,3 +121,28 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+DOMAIN = "http://localhost:8000"
+
+# Custom user model
+AUTH_USER_MODEL = 'users.CustomUser'
+
+
+# Email settings
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_USE_TLS = False
+EMAIL_USE_SSL = False
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'gabrielokemwa83@gmail.com'
+EMAIL_HOST_PASSWORD = 'password'
+EMAIL_TIMEOUT = 60
+EMAIL_USE_LOCALTIME = True
+
+# Email verification settings
+EMAIL_VERIFICATION = False
+EMAIL_VERIFICATION_AFTER_SIGNUP = False
+EMAIL_VERIFICATION_AFTER_PASSWORD_RESET = False
+
+# 
+

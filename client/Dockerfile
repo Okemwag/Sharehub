@@ -1,11 +1,12 @@
-FROM node:20.04-slim
+FROM node:20-alpine as build
 
 WORKDIR /app
 
-COPY package.json /app
+COPY package.json ./
 
-RUN yarn install
+RUN npm install
 
-COPY . /app
+COPY . .
 
-CMD ["yarn", "start"]
+RUN npm run build
+

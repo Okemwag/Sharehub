@@ -15,7 +15,7 @@ services:
   backend:
     build:
       context: .
-    
+
     ports:
       - 8000:8000
     depends_on:
@@ -30,7 +30,7 @@ services:
       - rabbitmq
       - redis
       - db
-    command: celery -A backend worker --loglevel=info
+    command: celery -A config worker --loglevel=info
 
 
   redis:
@@ -59,7 +59,7 @@ services:
     ports:
       - 5672:5672
       - 15672:15672
-  
+
   elastic:
     image: docker.elastic.co/elasticsearch/elasticsearch:8.11.1
     ports:

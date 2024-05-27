@@ -1,7 +1,6 @@
 # Serializers for the user model:
-
 from rest_framework import serializers
-from apps.users.models import CustomUser
+from .models import CustomUser
 
 
 class CustomUserSerializer(serializers.ModelSerializer):
@@ -12,7 +11,10 @@ class CustomUserSerializer(serializers.ModelSerializer):
             "email",
             "first_name",
             "last_name",
-            "is_email_verified",
+            "user_name",
+            "bio",
+            "avatar",
+
             "is_active",
             "is_staff",
             "is_superuser",
@@ -22,7 +24,6 @@ class CustomUserSerializer(serializers.ModelSerializer):
         ]
         read_only_fields = [
             "id",
-            "is_email_verified",
             "is_active",
             "is_staff",
             "is_superuser",

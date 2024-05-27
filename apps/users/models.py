@@ -1,38 +1,46 @@
 from django.db import models
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 from django.utils.translation import gettext_lazy as _
 
-from apps.users.managers import CustomUserManager
 
+from .managers import CustomUserManager
 
-class CustomUser(AbstractUser):
-    username = None
-    email = models.EmailField(
-        _("email address"),
-        max_length=255,
-        unique=True,
-        help_text=_("Required to authenticate"),
-    )
-    is_email_verified = models.BooleanField(
-        _("email verified"),
-        default=False,
-        help_text=_("Specifies whether the user should verify their email address."),
-    )
-    last_logout = models.DateTimeField(
-        _("last date logout"),
-        blank=True,
-        null=True,
-        help_text=_("last date logout user"),
-    )
-    USERNAME_FIELD = "email"
-    REQUIRED_FIELDS = ["first_name", "last_name"]
+class CustomUser(AbstractBaseUser, PermissionsMixin):
+    email = models.EmailField(_('email address'), unique=True)
+    first_name = models.CharField(_('first name'), max_length=30, blank=True)
+    last_name = models.CharField(_('last name'), max_length=30, blank=True)
+    user_name = models.CharField(_('user name'), max_length=30, blank=True)
+    bio = models.TextField(_('bio'), blank=True)
+    avatar = models.ImageField(_('avatar'), upload_to='avatars/', blank=True, null=True)
+    date_joined = models.DateTimeField(_('date joined'), auto_now_add=True)
+    last_login = models.DateTimeField(_('last login'), auto_now=True)
+    is_active = models.BooleanField(_('active'), default=True)
+    is_staff = models.BooleanField(_('staff'), default=False)
+    is_superuser = models.BooleanField(_('superuser'), default=False)
 
     objects = CustomUserManager()
 
-    class Meta:
-        verbose_name = _("User")
-        verbose_name_plural = _("Users")
-        ordering = ("-date_joined",)
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = []
 
-    def __str__(self) -> str:
-        return f"{self.first_name} {self.last_name} <{self.email}>"
+    class Meta:
+        verbose_name = _('user')
+        verbose_name_plural = _('users')
+
+    def __str__(self):
+        return self.email
+
+    def get_full_name(self) -> str:
+        full_name = f'{self.first_name} {self.last_name}'
+        return full_name.strip()
+
+    def get_username(self) -> str:
+        return super().get_username()
+
+    def has_perm(self, perm, obj=None) -> bool:
+        return self.is_superuser
+
+    def has_module_perms(self, app_label) -> bool:
+        return self.is_superuser
+
+

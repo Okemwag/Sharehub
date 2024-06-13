@@ -211,7 +211,8 @@ CORS_ALLOW_CREDENTIALS = True
 
 MEDIA_FILE_MAX_AGE = 90
 
-MEDIA_URL = BASE_DIR
+MEDIA_URL = "/media/"
+MEDIA_ROOT = BASE_DIR / "media" 
 
 
 # Logging configuration

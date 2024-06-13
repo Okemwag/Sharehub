@@ -1,6 +1,7 @@
 import os
 import uuid
 
+
 def rename_post_img_video(instance, filename: str) -> str:
     """
     Rename an uploaded file to a unique name using UUID and organize it into subdirectories based on the instance's ID to prevent large directory listings.

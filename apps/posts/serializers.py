@@ -1,7 +1,9 @@
 from typing import Any, Dict
+
 from rest_framework import serializers
 from rest_framework.request import Request
-from .models import Post, LikePost
+
+from .models import LikePost, Post
 
 
 class PostSerializer(serializers.ModelSerializer):

@@ -1,22 +1,18 @@
-from rest_framework import viewsets, status, filters
-from rest_framework.permissions import IsAuthenticated, AllowAny
-from rest_framework.response import Response
-from rest_framework.decorators import action
-from django_filters.rest_framework import DjangoFilterBackend
-from django.core.exceptions import ObjectDoesNotExist
 import logging
 from typing import Any, Dict
 
-from .models import  LikePost
-from .serializers import PostSerializer, LikePostSerializer
+from django.core.exceptions import ObjectDoesNotExist
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework import filters, status, viewsets
+from rest_framework.decorators import action
+from rest_framework.permissions import AllowAny, IsAuthenticated
+from rest_framework.response import Response
+
 from .exceptions import PostDoesNotExist
-from .selectors import (
-    get_all_posts,
-    get_user_posts,
-    search_posts,
-    get_trending_posts,
-    
-)
+from .models import LikePost
+from .selectors import (get_all_posts, get_trending_posts, get_user_posts,
+                        search_posts)
+from .serializers import LikePostSerializer, PostSerializer
 
 logger = logging.getLogger(__name__)
 

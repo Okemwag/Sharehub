@@ -1,6 +1,8 @@
 from typing import Optional
-from django.db.models import QuerySet, Q
-from .models import Post, LikePost
+
+from django.db.models import Q, QuerySet
+
+from .models import LikePost, Post
 
 
 def get_all_posts() -> QuerySet[Post]:

@@ -1,6 +1,6 @@
 from rest_framework import routers
-from .views import PostViewSet, LikePostViewSet
 
+from .views import LikePostViewSet, PostViewSet
 
 app_name = 'apps.posts'
 

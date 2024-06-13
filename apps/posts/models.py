@@ -1,10 +1,12 @@
+import uuid
+
 from django.contrib.auth import get_user_model
 from django.core.validators import FileExtensionValidator
 from django.db import models
 from django.utils.translation import gettext_lazy as _
-import uuid
 
 from apps.posts.utils import rename_post_img_video
+
 from .tasks import resize_images
 
 User = get_user_model()

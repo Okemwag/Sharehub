@@ -1,8 +1,10 @@
 import os
+
 from celery import shared_task
-from PIL import Image
 from django.conf import settings
 from django.utils import timezone
+from PIL import Image
+
 
 @shared_task
 def resize_images(image_path: str, image_name: str, sizes: list) -> None:

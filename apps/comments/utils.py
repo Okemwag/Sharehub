@@ -1,5 +1,4 @@
-from typing import Union
-from typing import Dict 
+from typing import Dict, Union
 
 
 def get_comment_data(comment: Dict[str, Union[str, int]]) -> Dict[str, Union[str, int]]:

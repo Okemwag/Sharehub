@@ -1,3 +1,4 @@
+# settings.py
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -19,12 +20,13 @@ ALLOWED_HOSTS = ["*"]
 # Application definition
 
 DJANGO_APPS = [
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
+    "daphne",
+    "django.contrib.admin",
+    "django.contrib.auth",
+    "django.contrib.contenttypes",
+    "django.contrib.sessions",
+    "django.contrib.messages",
+    "django.contrib.staticfiles",
 ]
 
 CUSTOM_APPS = [
@@ -35,10 +37,11 @@ CUSTOM_APPS = [
     'apps.notification',
     'apps.voting',
     'apps.search',
-    'aps.profiles',
+    'apps.profiles',
 ]
 
 THIRD_PARTY_APPS = [
+    
     'rest_framework',
     'drf_yasg',
     'corsheaders',
@@ -58,14 +61,14 @@ INSTALLED_APPS = DJANGO_APPS + CUSTOM_APPS + THIRD_PARTY_APPS
 
 
 MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
-
+    "django.middleware.security.SecurityMiddleware",
+    "django.contrib.sessions.middleware.SessionMiddleware",
+    "django.middleware.common.CommonMiddleware",
+    "django.middleware.csrf.CsrfViewMiddleware",
+    "django.contrib.auth.middleware.AuthenticationMiddleware",
+    "django.contrib.messages.middleware.MessageMiddleware",
+    "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "allauth.account.middleware.AccountMiddleware",
 ]
 
 ROOT_URLCONF = 'config.urls'
@@ -87,6 +90,8 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'config.wsgi.application'
+
+ASGI_APPLICATION = "config.asgi.application"
 
 
 # Database
@@ -141,6 +146,23 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ],
+    
+    'DEFAULT_FILTER_BACKENDS': [
+        'django_filters.rest_framework.DjangoFilterBackend',
+    ],
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 10,
+    'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema',
+
+}
+
+
 DOMAIN = "http://localhost:8000"
 
 # Custom user model
@@ -187,6 +209,10 @@ CELERY_TASK_DEFAULT_ROUTING_KEY = "default"
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = True
 
+MEDIA_FILE_MAX_AGE = 90
+
+MEDIA_URL = BASE_DIR
+
 
 # Logging configuration
 LOGGING = {
@@ -209,3 +235,43 @@ LOGGING = {
         "": {"handlers": ["console"], "level": "DEBUG", "propagate": False},
     },
 }
+
+
+# import cloudinary
+# import cloudinary.api
+# import cloudinary.uploader
+
+# cloudinary.config(
+#     cloud_name="dyae2aocp",
+#     api_key="856165385862893",
+#     api_secret="bN7eBdQZJo4aZZ0k7uJHbI1e_Rg",
+# )
+
+# UPLOAD_PRESET = "sharehub"
+
+# upload_preset_config = {
+#     "upload_preset": UPLOAD_PRESET,
+#     "cloud_name": "dyae2aocp",
+#     "api_key": "856165385862893",
+#     "api_secret": "bN7eBdQZJo4aZZ0k7uJHbI1e_Rg",
+#     "folder": "sharehub",
+#     "resource_type": "auto",
+#     "overwrite": True,
+#     "notification_url": "https://webhook.site/7d0a6e4a-4d7d-4e6d-8c7d-4e6d8c7d",
+#     "tags": "sharehub",
+#     "use_filename": True,
+#     "unique_filename": False,
+#     "eager": [
+#         {"width": 300, "height": 300, "crop": "pad", "audio_codec": "none"},
+#         {
+#             "width": 160,
+#             "height": 100,
+#             "crop": "crop",
+#             "gravity": "south",
+#             "audio_codec": "none",
+#         },
+#     ],
+#     "eager_async": True,
+#     "eager_notification_url": "https://webhook.site/7d0a6e4a-4d7d-4e6d-8c7d-4e6d8c7d",
+#     "type": "upload",
+# }

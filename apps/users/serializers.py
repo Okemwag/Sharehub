@@ -1,5 +1,6 @@
 # Serializers for the user model:
 from rest_framework import serializers
+
 from .models import CustomUser
 
 

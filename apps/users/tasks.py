@@ -1,10 +1,10 @@
+from celery import shared_task
+from django.conf import settings
+from django.contrib.auth.tokens import default_token_generator
 from django.core.mail import EmailMessage
 from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode
-from django.conf import settings
-from django.contrib.auth.tokens import default_token_generator
 from django.utils.translation import gettext_lazy as _
-from celery import shared_task
 
 from .models import CustomUser
 

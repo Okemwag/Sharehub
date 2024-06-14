@@ -18,8 +18,3 @@ class AlreadyLikedPost(APIException):
     status_code = status.HTTP_400_BAD_REQUEST
     default_detail = 'Post already liked.'
     default_code = 'bad_request'
-    
-    
-
-    
-    

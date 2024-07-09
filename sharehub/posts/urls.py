@@ -2,7 +2,7 @@ from rest_framework import routers
 
 from .views import LikePostViewSet, PostViewSet
 
-app_name = 'apps.posts'
+app_name = 'sharehub.posts'
 
 router = routers.DefaultRouter()
 # router.register(r"posts", PostViewSet)

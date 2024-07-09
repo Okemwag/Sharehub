@@ -1,4 +1,5 @@
 from rest_framework import serializers
+
 from .models import CustomUser
 
 
@@ -10,7 +11,7 @@ class CustomUserSerializer(serializers.ModelSerializer):
     user_name = serializers.CharField(required=False)
     bio = serializers.CharField(required=False)
     avatar = serializers.ImageField(required=False)
-    
+
     class Meta:
         model = CustomUser
         fields = [
@@ -21,7 +22,6 @@ class CustomUserSerializer(serializers.ModelSerializer):
             "user_name",
             "bio",
             "avatar",
-
             "is_active",
             "is_staff",
             "is_superuser",

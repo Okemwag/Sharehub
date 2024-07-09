@@ -13,6 +13,5 @@ application = ProtocolTypeRouter(
         "http": django_asgi_app,
         "websocket": "config.routing.application",
         "channel": "config.routing.channel_layer",
-        
     }
 )

@@ -10,7 +10,7 @@ from rest_framework.response import Response
 
 from .exceptions import PostDoesNotExist
 from .models import LikePost
-from .selectors import (get_all_posts, get_trending_posts, get_user_posts)
+from .selectors import get_all_posts, get_trending_posts, get_user_posts
 from .serializers import LikePostSerializer, PostSerializer
 
 logger = logging.getLogger(__name__)

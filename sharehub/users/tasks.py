@@ -25,5 +25,3 @@ def send_email_verification(user_id: int) -> None:
     email = EmailMessage(subject, message, to=[user.email])
     email.send()
     return None
-
-

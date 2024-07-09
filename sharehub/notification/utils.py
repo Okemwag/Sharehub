@@ -12,6 +12,7 @@ def send_post_notification(user, post):
     send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, [user.email])
     return None
 
+
 def confirm_email(user):
     """
     Send an email to the user to confirm their email.

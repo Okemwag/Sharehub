@@ -15,16 +15,17 @@ services:
   backend:
     build:
       context: .
-
     ports:
       - 8000:8000
+    volumes:
+      - .:/app
     depends_on:
       - db
 
   celery:
     image: celery:latest
     volumes:
-      - ./backend:/app
+      - .:/app
     depends_on:
       - backend
       - rabbitmq
@@ -68,7 +69,8 @@ services:
       - backend
       - rabbitmq
       - celery
-    command: flower -A config --port=5555
+      - redis
+    command: ['flower', '--broker=redis://redis:6379', '--port=5555']
 
   # elastic:
   #   image: docker.elastic.co/elasticsearch/elasticsearch:8.11.1

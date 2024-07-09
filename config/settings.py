@@ -107,10 +107,10 @@ DATABASES = {
         "HOST": "db",  
         "PORT": "5432",  
     },
-    "sqlite": {
-        "ENGINE": "django.db.backends.sqlite3",  
-        "NAME": BASE_DIR / "db.sqlite3",  
-    },
+    # "sqlite": {
+    #     "ENGINE": "django.db.backends.sqlite3",  
+    #     "NAME": BASE_DIR / "db.sqlite3",  
+    # },
 }
 
 
@@ -173,7 +173,7 @@ REST_FRAMEWORK = {
 
 SITE_ID = 1
 
-DOMAIN = "https://share-hub.co"
+# DOMAIN = "https://share-hub.co"
 
 # Custom user model
 AUTH_USER_MODEL = 'users.CustomUser'
@@ -260,23 +260,11 @@ CACHEOPS = {
     "core.*": {"ops": "all", "timeout": 60 * 60 * 3},
 }
 
-# Allauth settings
-ACCOUNT_EMAIL_REQUIRED = True
-ACCOUNT_EMAIL_VERIFICATION = "mandatory"
-ACCOUNT_AUTHENTICATION_METHOD = "email"
-ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 3
-ACCOUNT_EMAIL_VERIFICATION_EXPIRE_DAYS = 3
-ACCOUNT_LOGIN_ATTEMPTS_LIMIT = 5
-ACCOUNT_LOGIN_ATTEMPTS_TIMEOUT = 300
-ACCOUNT_LOGOUT_ON_GET = True
-ACCOUNT_UNIQUE_EMAIL = True
-ACCOUNT_USERNAME_REQUIRED = False
-ACCOUNT_USER_MODEL_USERNAME_FIELD = None
-ACCOUNT_USER_MODEL_EMAIL_FIELD = "email"
 
 
-SECURE_SSL_REDIRECT = False
-SESSION_COOKIE_SECURE = True
-CSRF_COOKIE_SECURE = True
-USE_X_FORWARDED_HOST = True
-SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+
+# SECURE_SSL_REDIRECT = False
+# SESSION_COOKIE_SECURE = True
+# CSRF_COOKIE_SECURE = True
+# USE_X_FORWARDED_HOST = True
+# SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")

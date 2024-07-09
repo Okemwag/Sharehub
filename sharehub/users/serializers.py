@@ -3,7 +3,7 @@ from .models import CustomUser
 
 
 class CustomUserSerializer(serializers.ModelSerializer):
-    id = serializers.IntegerField(read_only=True)
+    uid = serializers.UUIDField(source="uid", read_only=True)
     email = serializers.EmailField(required=True)
     first_name = serializers.CharField(required=True)
     last_name = serializers.CharField(required=True)
@@ -14,7 +14,7 @@ class CustomUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = CustomUser
         fields = [
-            "id",
+            "uid",
             "email",
             "first_name",
             "last_name",

@@ -1,7 +1,5 @@
 from typing import Optional
-
 from django.db.models import Q, QuerySet
-
 from .models import LikePost, Post
 
 
@@ -11,12 +9,6 @@ def get_all_posts() -> QuerySet[Post]:
 
 def get_user_posts(user_id: int) -> QuerySet[Post]:
     return Post.objects.filter(author_id=user_id)
-
-
-def search_posts(query: str) -> QuerySet[Post]:
-    return Post.objects.filter(
-        Q(caption__icontains=query) | Q(author__first_name__icontains(query))
-    )
 
 
 def get_trending_posts(limit: int = 5) -> QuerySet[Post]:

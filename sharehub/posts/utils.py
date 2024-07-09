@@ -1,5 +1,6 @@
 import os
 import uuid
+from typing import Dict, Union
 
 
 def rename_post_img_video(instance, filename: str) -> str:
@@ -39,3 +40,13 @@ upload_preset_config = {
     "eager_notification_url": "https://webhook.site/7d0a6e4a-4d7d-4e6d-8c7d-4e6d8c7d",
     "type": "upload"
 }
+
+def get_comment_data(comment: Dict[str, Union[str, int]]) -> Dict[str, Union[str, int]]:
+    return {
+        "id": comment["id"],
+        "content": comment["content"],
+        "author": comment["author"],
+        "created_at": comment["created_at"],
+        "updated_at": comment["updated_at"],
+        "post_id": comment["post_id"],
+    }

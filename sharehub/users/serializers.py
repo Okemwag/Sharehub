@@ -5,6 +5,14 @@ from .models import CustomUser
 
 
 class CustomUserSerializer(serializers.ModelSerializer):
+    id = serializers.IntegerField(read_only=True)
+    email = serializers.EmailField(required=True)
+    first_name = serializers.CharField(required=True)
+    last_name = serializers.CharField(required=True)
+    user_name = serializers.CharField(required=False)
+    bio = serializers.CharField(required=False)
+    avatar = serializers.ImageField(required=False)
+    
     class Meta:
         model = CustomUser
         fields = [

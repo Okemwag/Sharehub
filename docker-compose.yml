@@ -22,7 +22,7 @@ services:
       - db
 
   celery:
-    image: celery:5.2.0
+    image: celery:latest
     volumes:
       - ./backend:/app
     depends_on:
@@ -34,22 +34,22 @@ services:
 
 
   redis:
-    image: redis:7.2.4-alpine
+    image: redis:latest
     ports:
-      - 6379:6379
+      - 6378:6379
 
   db:
-    image: postgres:15
+    image: postgres:latest
     volumes:
       - ./postgres_data:/var/lib/postgresql/data/
     environment:
       - "POSTGRES_HOST_AUTH_METHOD=trust"
     ports:
-      - 5434:5432
+      - 5433:5432
 
 
   rabbitmq:
-    image: rabbitmq:3.13-alpine
+    image: rabbitmq:latest
     volumes:
       - ./rabbitmq_data:/var/lib/rabbitmq
     environment:
@@ -60,13 +60,23 @@ services:
       - 5672:5672
       - 15672:15672
 
-  elastic:
-    image: docker.elastic.co/elasticsearch/elasticsearch:8.11.1
+  flower:
+    image: mher/flower
     ports:
-      - 9200:9200
-      - 9300:9300
-    environment:
-      - discovery.type=single-node
+      - 5555:5555
+    depends_on:
+      - backend
+      - rabbitmq
+      - celery
+    command: flower -A config --port=5555
+
+  # elastic:
+  #   image: docker.elastic.co/elasticsearch/elasticsearch:8.11.1
+  #   ports:
+  #     - 9200:9200
+  #     - 9300:9300
+  #   environment:
+  #     - discovery.type=single-node
 
 
 volumes:

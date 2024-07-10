@@ -12,7 +12,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(_("email address"), unique=True)
     first_name = models.CharField(_("first name"), max_length=30, blank=True)
     last_name = models.CharField(_("last name"), max_length=30, blank=True)
-    user_name = models.CharField(_("user name"), max_length=30, blank=True)
+    username = models.CharField(_("user name"), max_length=30, blank=True)
     bio = models.TextField(_("bio"), blank=True)
     avatar = models.ImageField(_("avatar"), upload_to="avatars/", blank=True, null=True)
     date_joined = models.DateTimeField(_("date joined"), auto_now_add=True)

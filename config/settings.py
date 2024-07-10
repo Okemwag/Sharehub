@@ -1,4 +1,5 @@
 # settings.py
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -44,12 +45,10 @@ THIRD_PARTY_APPS = [
     "drf_yasg",
     "corsheaders",
     "django_filters",
-    "rest_framework.authtoken",
-    "rest_auth",
     "allauth",
     "allauth.account",
     "allauth.socialaccount",
-    "rest_auth.registration",
+    "allauth.socialaccount.providers.github",
     "allauth.socialaccount.providers.google",
 ]
 
@@ -177,6 +176,34 @@ AUTHENTICATION_BACKENDS = [
     "allauth.account.auth_backends.AuthenticationBackend",
 ]
 
+LOGIN_REDIRECT_URL = "/"
+ACCOUNT_LOGOUT_REDIRECT_URL = "/"
+
+SOCIALACCOUNT_PROVIDERS = {
+    "github": {
+        "APP": {
+            "client_id": "Ov23liT9bviHjALQYj3N",
+            "secret": "058e5eadb5f0581bd67f063b69b2e337d82f7b4c",
+        }
+    },
+    "google": {
+        "APP": {
+            "client_id": "675723157464-3r8td0qqi83g7j9h42abkphcova3nuee.apps.googleusercontent.com",
+            "secret": "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",
+            "key": "",
+        },
+        "FETCH_USERINFO": True,
+        "SCOPE": [
+            "profile",
+            "email",
+        ],
+        "AUTH_PARAMS": {
+            "access_type": "online",
+        },
+        "OAUTH_PKCE_ENABLED": True,
+    },
+}
+
 
 # Email settings
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
@@ -222,6 +249,30 @@ MEDIA_FILE_MAX_AGE = 90
 
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
+
+AWS_ACCESS_KEY_ID = "40241eb6efe7801f4ba5412793c1a26a"
+AWS_SECRET_ACCESS_KEY = (
+    "3b99f4a48e52302201a0bd56f2dd8fcc912735f8f40a9012ca303f8b1c571e47"
+)
+AWS_STORAGE_BUCKET_NAME = "sharehub"
+AWS_S3_ENDPOINT_URL = "https://bvogirjixuicwzvegasy.supabase.co/storage/v1/s3"
+AWS_S3_REGION_NAME = "us-east-1"
+AWS_S3_SIGNATURE_VERSION = "s3v4"
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/4.1/howto/static-files/
+STORAGES = {
+    "default": {
+        "BACKEND": "storages.backends.s3boto3.S3Boto3Storage",
+        "OPTIONS": {
+            "access_key": os.getenv("AWS_ACCESS_KEY_ID", AWS_ACCESS_KEY_ID),
+            "secret_key": os.getenv("AWS_SECRET_KEY", AWS_SECRET_ACCESS_KEY),
+            "region_name": AWS_S3_REGION_NAME,
+            "bucket_name": AWS_STORAGE_BUCKET_NAME,
+            "endpoint_url": AWS_S3_ENDPOINT_URL,
+            "signature_version": AWS_S3_SIGNATURE_VERSION,
+        },
+    },
+}
 
 
 # Logging configuration

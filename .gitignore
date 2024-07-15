@@ -282,3 +282,5 @@ sketch
 
 postgres_data/
 rabbitmq_data/
+
+.env/

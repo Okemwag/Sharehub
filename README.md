@@ -22,7 +22,7 @@ The Content Sharing Platform is a web application that allows users to share, di
 - **Message Broker:** RabbitMQ
 - **Task Queue:** Celery
 - **Containerization:** Docker
-
+- **CI-CD:** CircleCI
 ## System Architecture
 
 ![System Design](contentsharing.png)

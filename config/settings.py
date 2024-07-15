@@ -259,12 +259,8 @@ MEDIA_FILE_MAX_AGE = 90
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
 
-AWS_ACCESS_KEY_ID = "40241eb6efe7801f4ba5412793c1a26a"
-AWS_SECRET_ACCESS_KEY = (
-    "3b99f4a48e52302201a0bd56f2dd8fcc912735f8f40a9012ca303f8b1c571e47"
-)
-AWS_STORAGE_BUCKET_NAME = "sharehub"
-AWS_S3_ENDPOINT_URL = "https://bvogirjixuicwzvegasy.supabase.co/storage/v1/s3"
+
+
 AWS_S3_REGION_NAME = "us-east-1"
 AWS_S3_SIGNATURE_VERSION = "s3v4"
 # Static files (CSS, JavaScript, Images)
@@ -273,11 +269,11 @@ STORAGES = {
     "default": {
         "BACKEND": "storages.backends.s3boto3.S3Boto3Storage",
         "OPTIONS": {
-            "access_key": os.getenv("AWS_ACCESS_KEY_ID", AWS_ACCESS_KEY_ID),
-            "secret_key": os.getenv("AWS_SECRET_KEY", AWS_SECRET_ACCESS_KEY),
+            "access_key": env("AWS_ACCESS_KEY_ID"),
+            "secret_key": env("AWS_SECRET_KEY"),
             "region_name": AWS_S3_REGION_NAME,
-            "bucket_name": AWS_STORAGE_BUCKET_NAME,
-            "endpoint_url": AWS_S3_ENDPOINT_URL,
+            "bucket_name": env("AWS_STORAGE_BUCKET_NAME"),
+            "endpoint_url": env("AWS_S3_ENDPOINT_URL"),
             "signature_version": AWS_S3_SIGNATURE_VERSION,
         },
     },

@@ -1,10 +1,19 @@
 # settings.py
 import os
+
+import environ
+
+env = environ.Env(
+    # set casting, default value
+    DEBUG=(bool, False)
+)
+
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+environ.Env.read_env(os.path.join(BASE_DIR, ".env"))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
@@ -182,14 +191,14 @@ ACCOUNT_LOGOUT_REDIRECT_URL = "/"
 SOCIALACCOUNT_PROVIDERS = {
     "github": {
         "APP": {
-            "client_id": "Ov23liT9bviHjALQYj3N",
-            "secret": "058e5eadb5f0581bd67f063b69b2e337d82f7b4c",
+            "client_id": env("GITHUB_CLIENT_ID"),
+            "secret": env("GITHUB_CLIENT_SECRET"),
         }
     },
     "google": {
         "APP": {
-            "client_id": "675723157464-3r8td0qqi83g7j9h42abkphcova3nuee.apps.googleusercontent.com",
-            "secret": "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",
+            "client_id": env("GOOGLE_CLIENT_ID"),
+            "secret": env("GOOGLE_CLIENT_SECRET"),
             "key": "",
         },
         "FETCH_USERINFO": True,

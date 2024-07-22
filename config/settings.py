@@ -152,7 +152,10 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_URL = "static/"
+STATIC_URL = "/static/"
+STATIC_ROOT = BASE_DIR / "collected_static"
+STATICFILES_DIRS = [BASE_DIR / "staticfiles"]
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
@@ -200,16 +203,7 @@ SOCIALACCOUNT_PROVIDERS = {
             "client_id": env("GOOGLE_CLIENT_ID"),
             "secret": env("GOOGLE_CLIENT_SECRET"),
             "key": "",
-        },
-        "FETCH_USERINFO": True,
-        "SCOPE": [
-            "profile",
-            "email",
-        ],
-        "AUTH_PARAMS": {
-            "access_type": "online",
-        },
-        "OAUTH_PKCE_ENABLED": True,
+        },     
     },
 }
 
@@ -259,25 +253,31 @@ MEDIA_FILE_MAX_AGE = 90
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
 
+# STATICFILES_STORAGE = "storages.backends.s3.S3Storage"
 
-
-AWS_S3_REGION_NAME = "us-east-1"
-AWS_S3_SIGNATURE_VERSION = "s3v4"
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/4.1/howto/static-files/
-STORAGES = {
-    "default": {
-        "BACKEND": "storages.backends.s3boto3.S3Boto3Storage",
-        "OPTIONS": {
-            "access_key": env("AWS_ACCESS_KEY_ID"),
-            "secret_key": env("AWS_SECRET_KEY"),
-            "region_name": AWS_S3_REGION_NAME,
-            "bucket_name": env("AWS_STORAGE_BUCKET_NAME"),
-            "endpoint_url": env("AWS_S3_ENDPOINT_URL"),
-            "signature_version": AWS_S3_SIGNATURE_VERSION,
-        },
-    },
-}
+# AWS_S3_REGION_NAME = "us-east-1"
+# AWS_S3_SIGNATURE_VERSION = "s3v4"
+# # Static files (CSS, JavaScript, Images)
+# # https://docs.djangoproject.com/en/4.1/howto/static-files/
+# STORAGES = {
+#     "default": {
+#         "BACKEND": "storages.backends.s3boto3.S3Boto3Storage",
+#         "OPTIONS": {
+#             "access_key": env("AWS_ACCESS_KEY_ID"),
+#             "secret_key": env("AWS_SECRET_KEY"),
+#             "region_name": AWS_S3_REGION_NAME,
+#             "bucket_name": env("AWS_STORAGE_BUCKET_NAME"),
+#             "endpoint_url": env("AWS_S3_ENDPOINT_URL"),
+#             "signature_version": AWS_S3_SIGNATURE_VERSION,
+#         },
+#     },
+#     "staticfiles": {
+#         "BACKEND": "django.core.files.storage.FileSystemStorage",
+#         "OPTIONS": {
+#             "location": BASE_DIR / "staticfiles",
+#         },
+#     },
+# }
 
 
 # Logging configuration
@@ -310,6 +310,7 @@ CACHEOPS = {
     "core.*": {"ops": "all", "timeout": 60 * 60 * 3},
 }
 
+# ACCOUNT_DEFAULT_HTTP_PROTOCOL = "https"
 
 # SECURE_SSL_REDIRECT = False
 # SESSION_COOKIE_SECURE = True

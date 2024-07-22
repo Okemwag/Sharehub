@@ -62,13 +62,25 @@ services:
       - CELERY_BROKER_URL=redis://redis:6379/0
       - FLOWER_PORT=5555
 
-  # elastic:
-  #   image: docker.elastic.co/elasticsearch/elasticsearch:8.11.1
-  #   ports:
-  #     - 9200:9200
-  #     - 9300:9300
-  #   environment:
-  #     - discovery.type=single-node
+  prometheus:
+    networks:  
+      - sharehub
+    image: prom/prometheus:latest
+    container_name: prometheus
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml 
+      - ~/sharehub-volume/prometheus_data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/etc/prometheus/console_libraries'
+      - '--web.console.templates=/etc/prometheus/consoles'
+      - '--web.enable-lifecycle'
+    restart: unless-stopped
+    ports:
+      - 9090:9090
+    labels:
+      org.label-schema.group: "monitoring"
 
 
 volumes:
@@ -76,4 +88,4 @@ volumes:
 
 networks:
   sharehub:
-    external: false
+    driver: bridge

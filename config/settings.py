@@ -103,19 +103,24 @@ ASGI_APPLICATION = "config.asgi.application"
 
 
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": "postgres",
-        "USER": "postgres",
-        "PASSWORD": "postgres",
-        "HOST": "db",
-        "PORT": "5432",
-    },
+     'default': {
+         'ENGINE': 'django_cassandra_engine',
+         'NAME': 'db',
+         'TEST_NAME': 'test_db',
+         'HOST': 'db1.sharehub.com,db2.sharehub.com',
+         'OPTIONS': {
+             'replication': {
+                 'strategy_class': 'SimpleStrategy',
+                 'replication_factor': 1
+             }
+         }
+     }
+ }
     # "sqlite": {
     #     "ENGINE": "django.db.backends.sqlite3",
     #     "NAME": BASE_DIR / "db.sqlite3",
     # },
-}
+
 
 
 # Password validation

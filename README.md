@@ -17,7 +17,7 @@ The Content Sharing Platform is a web application that allows users to share, di
 
 - **Frontend:** Vue.js
 - **Backend:** Django
-- **Database:** PostgreSQL
+- **Database:** PostgreSQL + Cassandra
 - **Caching:** Redis
 - **Message Broker:** RabbitMQ
 - **Task Queue:** Celery
